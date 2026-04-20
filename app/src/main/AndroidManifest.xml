@@ -42,7 +42,7 @@
     
     
     android:showWhenLocked="true"
-    android:dismissKeyguard="true"
+    
             />
 
         <!-- Background service -->
