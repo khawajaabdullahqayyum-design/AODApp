@@ -53,7 +53,7 @@ public class AODService extends Service {
                     // Delay so system lock screen doesn't interfere
                     new Handler(Looper.getMainLooper()).postDelayed(() -> {
                         if (!isAODShowing) launchAOD();
-                    }, 400);
+                    }, 800);
                 } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
                     isAODShowing = false;
                 }
