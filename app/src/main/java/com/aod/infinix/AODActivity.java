@@ -47,7 +47,9 @@ public class AODActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefs = getSharedPreferences("aod_prefs", MODE_PRIVATE);
-
+getWindow().addFlags(
+    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+);
         // ── SCREEN FIX: Keep screen on permanently at low brightness ──
         Window window = getWindow();
 window.addFlags(
@@ -148,10 +150,11 @@ public void onBackPressed() {
 public boolean dispatchKeyEvent(KeyEvent event) {
     if (event.getKeyCode() == KeyEvent.KEYCODE_POWER) {
         if (event.getAction() == KeyEvent.ACTION_UP) {
-            // Power btn released — AOD band karo
+            // Screen ko on rakho aur sirf AOD band karo
+            // Lock screen automatically aayegi
             finish();
         }
-        return true; // consume event
+        return true; // power button ko screen band karne se roko
     }
     return super.dispatchKeyEvent(event);
 }
