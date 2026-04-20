@@ -44,8 +44,19 @@ public class AODActivity extends Activity {
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+protected void onCreate(Bundle savedInstanceState) {
+    // Sabse pehle yeh — koi bhi cheez dikhne se pehle
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+        setShowWhenLocked(true);
+        setTurnScreenOn(true);
+    }
+    getWindow().addFlags(
+        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON   |
+        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+    );
+    
+    super.onCreate(savedInstanceState);
         prefs = getSharedPreferences("aod_prefs", MODE_PRIVATE);
 getWindow().addFlags(
     WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
