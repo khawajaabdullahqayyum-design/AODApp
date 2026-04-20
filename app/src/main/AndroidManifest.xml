@@ -31,17 +31,14 @@
         <!-- AOD overlay screen — shows on lock screen -->
         <activity
             android:name=".AODActivity"
-            android:exported="false"
-            android:showOnLockScreen="true"
-            android:turnScreenOn="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:screenOrientation="portrait"
-            android:excludeFromRecents="true"
-            android:launchMode="singleInstance" 
-        
-    
-    
     android:showWhenLocked="true"
+    android:turnScreenOn="true"
+    android:showOnLockScreen="true"
+    android:excludeFromRecents="true"
+    android:launchMode="singleInstance"
+    android:theme="@style/Theme.AppCompat.NoActionBar"
+    android:screenOrientation="portrait"
+    android:exported="false" 
     
             />
 
