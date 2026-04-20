@@ -18,6 +18,8 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import java.util.Calendar;
+import android.app.KeyguardManager;
+import android.os.Build;
 
 public class AODActivity extends Activity {
 
@@ -47,13 +49,24 @@ public class AODActivity extends Activity {
 
         // ── SCREEN FIX: Keep screen on permanently at low brightness ──
         Window window = getWindow();
-        window.addFlags(
-            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED   |
-            WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON     |
-            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON     |
-            WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD   |
-            WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
-        );
+window.addFlags(
+    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON     |
+    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON     |
+    WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
+);
+
+// Android 8.1+ ka naya tarika
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+    setShowWhenLocked(true);
+    setTurnScreenOn(true);
+    KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+    if (km != null) km.requestDismissKeyguard(this, null);
+} else {
+    window.addFlags(
+        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+    );
+}
         WindowManager.LayoutParams lp = window.getAttributes();
         lp.screenBrightness = 0.04f; // 4% brightness — saves battery
         window.setAttributes(lp);
