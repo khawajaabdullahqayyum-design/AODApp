@@ -52,7 +52,7 @@ public class AODService extends Service {
     isAODShowing = false;
     new Handler(Looper.getMainLooper()).postDelayed(() -> {
         if (!isAODShowing) launchAOD();
-    }, 500); // 500ms delay
+    }, 0); // 500ms delay
 } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
     // Screen on hui — AOD service ko pata chale
     isAODShowing = false;
