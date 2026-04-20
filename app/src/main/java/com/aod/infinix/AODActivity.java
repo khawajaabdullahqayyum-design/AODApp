@@ -20,6 +20,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 import android.app.KeyguardManager;
 import android.os.Build;
+import android.view.KeyEvent;
 
 public class AODActivity extends Activity {
 
@@ -138,6 +139,22 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
         try { unregisterReceiver(batteryReceiver); } catch (Exception ignored) {}
         try { unregisterReceiver(screenReceiver);  } catch (Exception ignored) {}
     }
+    @Override
+public void onBackPressed() {
+    // Back button kuch na kare AOD mein
+}
+
+@Override
+public boolean dispatchKeyEvent(KeyEvent event) {
+    if (event.getKeyCode() == KeyEvent.KEYCODE_POWER) {
+        if (event.getAction() == KeyEvent.ACTION_UP) {
+            // Power btn released — AOD band karo
+            finish();
+        }
+        return true; // consume event
+    }
+    return super.dispatchKeyEvent(event);
+}
 
     private void updateClockVisibility() {
         analogClockView.setVisibility(showingAnalog ? View.VISIBLE : View.GONE);
