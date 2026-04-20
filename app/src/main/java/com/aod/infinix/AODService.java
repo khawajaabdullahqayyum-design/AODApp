@@ -49,13 +49,13 @@ public class AODService extends Service {
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
                 if (Intent.ACTION_SCREEN_OFF.equals(action)) {
-                    isAODShowing = false;
-                    // Delay so system lock screen doesn't interfere
-                    new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                        if (!isAODShowing) launchAOD();
-                    }, 800);
-                } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
-                    isAODShowing = false;
+    isAODShowing = false;
+    new Handler(Looper.getMainLooper()).postDelayed(() -> {
+        if (!isAODShowing) launchAOD();
+    }, 500); // 500ms delay
+} else if (Intent.ACTION_SCREEN_ON.equals(action)) {
+    // Screen on hui — AOD service ko pata chale
+    isAODShowing = false;
                 }
             }
         };
